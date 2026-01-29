@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emerald Beacon AI Hub - Discover the Best AI Tools</title>
+    <meta name="description" content="Your trusted hub for discovering and exploring the best AI tools. Find the perfect AI solution for your needs.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <div class="nav-brand">
+                <i class="fas fa-gem"></i>
+                <span>Emerald Beacon AI Hub</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#tools">Tools</a></li>
+                <li><a href="#categories">Categories</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#submit" class="btn-submit">Submit Tool</a></li>
+            </ul>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1 class="hero-title">Discover the Best AI Tools</h1>
+            <p class="hero-subtitle">Explore 83+ AI tools to boost your productivity and creativity</p>
+
+            <!-- Search Bar -->
+            <div class="search-container">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Search AI tools...">
+                </div>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-number">83</span>
+                    <span class="stat-label">AI Tools</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">14</span>
+                    <span class="stat-label">Categories</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">1K+</span>
+                    <span class="stat-label">Users</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories" id="categories">
+        <div class="container">
+            <h2 class="section-title">Browse by Category</h2>
+            <div class="category-grid">
+                <button class="category-card active" data-category="all">
+                    <i class="fas fa-th"></i>
+                    <span>All Tools</span>
+                </button>
+                <button class="category-card" data-category="favorites">
+                    <i class="fas fa-star"></i>
+                    <span>Our Favorites</span>
+                </button>
+                <button class="category-card" data-category="writing">
+                    <i class="fas fa-pen"></i>
+                    <span>Writing</span>
+                </button>
+                <button class="category-card" data-category="image">
+                    <i class="fas fa-image"></i>
+                    <span>Image Generation</span>
+                </button>
+                <button class="category-card" data-category="video">
+                    <i class="fas fa-video"></i>
+                    <span>Video</span>
+                </button>
+                <button class="category-card" data-category="code">
+                    <i class="fas fa-code"></i>
+                    <span>Coding</span>
+                </button>
+                <button class="category-card" data-category="voice">
+                    <i class="fas fa-microphone"></i>
+                    <span>Voice & Audio</span>
+                </button>
+                <button class="category-card" data-category="business">
+                    <i class="fas fa-briefcase"></i>
+                    <span>Business</span>
+                </button>
+                <button class="category-card" data-category="marketing">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Marketing</span>
+                </button>
+                <button class="category-card" data-category="design">
+                    <i class="fas fa-palette"></i>
+                    <span>Design</span>
+                </button>
+                <button class="category-card" data-category="research">
+                    <i class="fas fa-flask"></i>
+                    <span>Research</span>
+                </button>
+                <button class="category-card" data-category="chatbot">
+                    <i class="fas fa-comments"></i>
+                    <span>Chatbots</span>
+                </button>
+                <button class="category-card" data-category="automation">
+                    <i class="fas fa-robot"></i>
+                    <span>Automation</span>
+                </button>
+                <button class="category-card" data-category="email">
+                    <i class="fas fa-envelope"></i>
+                    <span>Email Marketing</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filters Section -->
+    <section class="filters">
+        <div class="container">
+            <div class="filter-bar">
+                <div class="filter-group">
+                    <label>Pricing:</label>
+                    <select id="pricingFilter">
+                        <option value="all">All</option>
+                        <option value="free">Free</option>
+                        <option value="freemium">Freemium</option>
+                        <option value="paid">Paid</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Sort by:</label>
+                    <select id="sortFilter">
+                        <option value="popular">Most Popular</option>
+                        <option value="newest">Newest</option>
+                        <option value="name">Name (A-Z)</option>
+                    </select>
+                </div>
+                <div class="results-count">
+                    <span id="resultsCount">0</span> tools found
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools Grid Section -->
+    <section class="tools-section" id="tools">
+        <div class="container">
+            <div class="tools-grid" id="toolsGrid">
+                <!-- Tools will be dynamically inserted here -->
+            </div>
+
+            <!-- No Results Message -->
+            <div class="no-results" id="noResults" style="display: none;">
+                <i class="fas fa-search"></i>
+                <h3>No tools found</h3>
+                <p>Try adjusting your search or filters</p>
+            </div>
+
+            <!-- Load More Button -->
+            <div class="load-more-container">
+                <button class="btn-load-more" id="loadMoreBtn">
+                    Load More Tools
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Tools Section -->
+    <section class="featured-section">
+        <div class="container">
+            <h2 class="section-title">Featured AI Tools</h2>
+            <div class="featured-grid" id="featuredGrid">
+                <!-- Featured tools will be dynamically inserted here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Submit Tool Section -->
+    <section class="submit-section" id="submit">
+        <div class="container">
+            <div class="submit-card">
+                <h2>Submit Your AI Tool</h2>
+                <p>Have an AI tool you'd like to share? Submit it to our directory!</p>
+                <form class="submit-form" id="submitForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="toolName">Tool Name *</label>
+                            <input type="text" id="toolName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="toolWebsite">Website URL *</label>
+                            <input type="url" id="toolWebsite" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="toolCategory">Category *</label>
+                            <select id="toolCategory" required>
+                                <option value="">Select a category</option>
+                                <option value="writing">Writing</option>
+                                <option value="image">Image Generation</option>
+                                <option value="video">Video</option>
+                                <option value="code">Coding</option>
+                                <option value="voice">Voice & Audio</option>
+                                <option value="business">Business</option>
+                                <option value="marketing">Marketing</option>
+                                <option value="design">Design</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="toolPricing">Pricing *</label>
+                            <select id="toolPricing" required>
+                                <option value="">Select pricing</option>
+                                <option value="free">Free</option>
+                                <option value="freemium">Freemium</option>
+                                <option value="paid">Paid</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="toolDescription">Description *</label>
+                        <textarea id="toolDescription" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit-form">Submit Tool</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <div class="container">
+            <div class="newsletter-card">
+                <h2>Stay Updated</h2>
+                <p>Get weekly updates on the latest AI tools and trends</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3><i class="fas fa-gem"></i> Emerald Beacon AI Hub</h3>
+                    <p>Your trusted hub for discovering and exploring the best AI tools available.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Categories</h4>
+                    <ul>
+                        <li><a href="#writing">Writing Tools</a></li>
+                        <li><a href="#image">Image Generation</a></li>
+                        <li><a href="#video">Video Tools</a></li>
+                        <li><a href="#code">Coding Assistants</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#blog">Blog</a></li>
+                        <li><a href="#guides">Guides</a></li>
+                        <li><a href="#api">API</a></li>
+                        <li><a href="#about">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#privacy">Privacy Policy</a></li>
+                        <li><a href="#terms">Terms of Service</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Emerald Beacon AI Hub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
