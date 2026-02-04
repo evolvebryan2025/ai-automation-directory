@@ -1075,25 +1075,33 @@ function attachEventListeners() {
     });
 
     // Mobile menu toggle
-    mobileMenuToggle.addEventListener('click', () => {
-        navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
+    mobileMenuToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        navMenu.classList.toggle('active');
+    });
+
+    // Close mobile menu on outside click
+    document.addEventListener('click', (e) => {
+        if (window.innerWidth <= 968 && !e.target.closest('.nav')) {
+            navMenu.classList.remove('active');
+        }
     });
 
     // Smooth scroll for nav links
+    const headerHeight = document.querySelector('.header').offsetHeight;
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
+                const offsetTop = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
                 });
 
                 // Close mobile menu if open
-                if (window.innerWidth <= 968) {
-                    navMenu.style.display = 'none';
-                }
+                navMenu.classList.remove('active');
             }
         });
     });
@@ -1101,9 +1109,7 @@ function attachEventListeners() {
     // Handle window resize for mobile menu
     window.addEventListener('resize', () => {
         if (window.innerWidth > 968) {
-            navMenu.style.display = 'flex';
-        } else {
-            navMenu.style.display = 'none';
+            navMenu.classList.remove('active');
         }
     });
 }

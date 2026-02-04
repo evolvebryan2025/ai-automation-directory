@@ -153,7 +153,8 @@ code, pre, .monospace {
     color: white;
     padding: 8rem 0 5rem;
     text-align: center;
-    height: 100vh;
+    min-height: 100vh;
+    min-height: 100dvh;
     display: flex;
     align-items: center;
 }
@@ -748,6 +749,42 @@ code, pre, .monospace {
 @media (max-width: 968px) {
     .nav-menu {
         display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(14, 14, 14, 0.95);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        flex-direction: column;
+        padding: 1rem 1.5rem 1.5rem;
+        gap: 0;
+        border-top: 1px solid var(--border-color);
+        box-shadow: var(--shadow-lg);
+    }
+
+    .nav-menu.active {
+        display: flex;
+    }
+
+    .nav-menu li {
+        width: 100%;
+    }
+
+    .nav-menu a {
+        display: block;
+        padding: 0.75rem 0;
+        font-size: 1.1rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .nav-menu li:last-child a {
+        border-bottom: none;
+    }
+
+    .btn-submit {
+        text-align: center;
+        margin-top: 0.5rem;
     }
 
     .mobile-menu-toggle {
@@ -784,6 +821,10 @@ code, pre, .monospace {
 }
 
 @media (max-width: 640px) {
+    body {
+        font-size: 16px;
+    }
+
     .hero-logo {
         max-width: 180px;
     }
@@ -800,6 +841,24 @@ code, pre, .monospace {
         font-size: 1.25rem;
     }
 
+    .category-grid {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 0.5rem;
+    }
+
+    .category-card {
+        padding: 1rem;
+        gap: 0.5rem;
+    }
+
+    .category-card i {
+        font-size: 1.5rem;
+    }
+
+    .category-card span {
+        font-size: 0.8rem;
+    }
+
     .filter-bar {
         flex-direction: column;
         align-items: stretch;
@@ -807,6 +866,12 @@ code, pre, .monospace {
 
     .results-count {
         margin-left: 0;
+    }
+
+    .categories,
+    .tools-section,
+    .featured-section {
+        padding: 2rem 0;
     }
 
     .submit-card {
