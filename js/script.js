@@ -836,13 +836,11 @@ let state = {
     currentCategory: 'all',
     currentPricing: 'all',
     currentSort: 'popular',
-    searchQuery: '',
     displayedTools: 12,
     filteredTools: [...aiTools]
 };
 
 // DOM Elements
-const searchInput = document.getElementById('searchInput');
 const toolsGrid = document.getElementById('toolsGrid');
 const featuredGrid = document.getElementById('featuredGrid');
 const categoryCards = document.querySelectorAll('.category-card');
@@ -854,6 +852,57 @@ const loadMoreBtn = document.getElementById('loadMoreBtn');
 const submitForm = document.getElementById('submitForm');
 const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
 const navMenu = document.querySelector('.nav-menu');
+
+// Notification card
+function showNotification(title, message, type) {
+    const existing = document.querySelector('.notification-overlay');
+    if (existing) existing.remove();
+
+    const overlay = document.createElement('div');
+    overlay.className = 'notification-overlay';
+
+    const icon = type === 'success'
+        ? '<i class="fas fa-check-circle"></i>'
+        : '<i class="fas fa-exclamation-circle"></i>';
+
+    overlay.innerHTML = `
+        <div class="notification-card notification-${type}">
+            <div class="notification-icon">${icon}</div>
+            <h3>${title}</h3>
+            <p>${message}</p>
+            <button class="notification-close">OK</button>
+        </div>
+    `;
+
+    document.body.appendChild(overlay);
+    requestAnimationFrame(() => overlay.classList.add('visible'));
+
+    const close = () => {
+        overlay.classList.remove('visible');
+        setTimeout(() => overlay.remove(), 300);
+    };
+
+    overlay.querySelector('.notification-close').addEventListener('click', close);
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) close();
+    });
+}
+
+// Webhook helper
+async function sendToWebhook(data) {
+    const response = await fetch(CONFIG.WEBHOOK_URL, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + CONFIG.WEBHOOK_AUTH_TOKEN
+        },
+        body: JSON.stringify(data)
+    });
+    if (!response.ok) {
+        throw new Error('Webhook request failed');
+    }
+    return response;
+}
 
 // Initialize App
 function init() {
@@ -938,16 +987,6 @@ function filterTools() {
         filtered = filtered.filter(tool => tool.pricing === state.currentPricing);
     }
 
-    // Search filter
-    if (state.searchQuery) {
-        const query = state.searchQuery.toLowerCase();
-        filtered = filtered.filter(tool =>
-            tool.name.toLowerCase().includes(query) ||
-            tool.description.toLowerCase().includes(query) ||
-            tool.category.toLowerCase().includes(query)
-        );
-    }
-
     // Sort
     switch (state.currentSort) {
         case 'newest':
@@ -958,7 +997,6 @@ function filterTools() {
             break;
         case 'popular':
         default:
-            // Already in popular order
             break;
     }
 
@@ -975,12 +1013,6 @@ function updateResultsCount() {
 
 // Event Listeners
 function attachEventListeners() {
-    // Search
-    searchInput.addEventListener('input', (e) => {
-        state.searchQuery = e.target.value;
-        filterTools();
-    });
-
     // Category selection
     categoryCards.forEach(card => {
         card.addEventListener('click', () => {
@@ -1012,11 +1044,16 @@ function attachEventListeners() {
         renderTools();
     });
 
-    // Submit form
-    submitForm.addEventListener('submit', (e) => {
+    // Submit tool form — sends to webhook
+    submitForm.addEventListener('submit', async (e) => {
         e.preventDefault();
+        const btn = submitForm.querySelector('button[type="submit"]');
+        btn.disabled = true;
+        btn.textContent = 'Submitting...';
 
         const formData = {
+            type: 'tool_submission',
+            subject: 'AI Tools Hub consult request',
             name: document.getElementById('toolName').value,
             website: document.getElementById('toolWebsite').value,
             category: document.getElementById('toolCategory').value,
@@ -1024,19 +1061,17 @@ function attachEventListeners() {
             description: document.getElementById('toolDescription').value
         };
 
-        // In a real app, this would send to a backend
-        console.log('Tool submitted:', formData);
-        alert('Thank you for submitting your tool! We will review it shortly.');
-        submitForm.reset();
-    });
-
-    // Newsletter form
-    const newsletterForm = document.querySelector('.newsletter-form');
-    newsletterForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const email = e.target.querySelector('input[type="email"]').value;
-        alert(`Thanks for subscribing with ${email}!`);
-        e.target.reset();
+        try {
+            await sendToWebhook(formData);
+            submitForm.reset();
+            showNotification('Tool Submitted!', 'Thank you for submitting your tool. We will review it shortly.', 'success');
+        } catch (err) {
+            showNotification('Submission Failed', 'Something went wrong. Please try again.', 'error');
+            console.error('Webhook error:', err);
+        } finally {
+            btn.disabled = false;
+            btn.textContent = 'Submit Tool';
+        }
     });
 
     // Mobile menu toggle
@@ -1094,24 +1129,21 @@ function animateOnScroll() {
     });
 }
 
+// Header scroll effect — transparent at top, translucent when scrolled
+function initHeaderScroll() {
+    const header = document.querySelector('.header');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+}
+
 // Initialize app when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     init();
+    initHeaderScroll();
     setTimeout(animateOnScroll, 100);
 });
-
-// Add some dynamic data updates
-setInterval(() => {
-    // Simulate real-time updates (in a real app, this would fetch from an API)
-    const statNumbers = document.querySelectorAll('.stat-number');
-    statNumbers.forEach(stat => {
-        const currentValue = parseInt(stat.textContent.replace(/\D/g, ''));
-        const increment = Math.floor(Math.random() * 10);
-        const newValue = currentValue + increment;
-
-        // Only update occasionally to simulate real growth
-        if (Math.random() > 0.95) {
-            stat.textContent = newValue.toLocaleString() + '+';
-        }
-    });
-}, 5000);
