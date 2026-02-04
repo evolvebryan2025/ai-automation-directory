@@ -1,0 +1,3 @@
+[build]
+  command = "echo \"const CONFIG = { WEBHOOK_URL: 'https://n8n.disruptormedia.dev/webhook/21262acd-c5a1-412f-a4eb-1f0071ae80fd', WEBHOOK_AUTH_TOKEN: '$WEBHOOK_AUTH_TOKEN' };\" > js/config.js"
+  publish = "."
