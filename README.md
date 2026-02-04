@@ -1,19 +1,19 @@
-# Emerald Beacon AI Hub
+# Disruptors Media AI Tools Hub
 
-A modern, fully-functional AI tools directory featuring search, filtering, and responsive design. Built with Emerald Beacon branding.
+A modern, fully-functional AI tools directory featuring filtering, responsive design, and a dark theme with video background. Built with Disruptors Media branding.
 
 ## Features
 
-- **Hero Section** with search functionality
+- **Video Background** with frosted glass content sections
 - **Category Filtering** - Browse tools by category (Writing, Image Generation, Video, Coding, etc.)
-- **Advanced Search** - Search by tool name, description, or category
 - **Pricing Filters** - Filter by Free, Freemium, or Paid tools
 - **Sorting Options** - Sort by popularity, newest, or alphabetically
 - **Featured Tools** - Highlighted showcase of top AI tools
-- **Tool Submission Form** - Allow users to submit new AI tools
-- **Newsletter Signup** - Email subscription for updates
-- **Responsive Design** - Works perfectly on desktop, tablet, and mobile
-- **Smooth Animations** - Modern UI with fade-in effects and hover states
+- **Tool Submission Form** - Submit new AI tools via webhook
+- **52 Individual Tool Pages** - Detailed pages for each AI tool
+- **Custom Notification Cards** - Styled success/error feedback
+- **Responsive Design** - Works on desktop, tablet, and mobile
+- **Smooth Animations** - Fade-in effects and hover states
 
 ## Tech Stack
 
@@ -22,36 +22,11 @@ A modern, fully-functional AI tools directory featuring search, filtering, and r
 - Vanilla JavaScript (No frameworks required)
 - Font Awesome Icons
 
-## Installation
+## Setup
 
-1. Clone or download this project
-2. Open `index.html` in your web browser
-3. No build process or dependencies required!
-
-## Project Structure
-
-```
-ai-tools-directory/
-├── index.html          # Main HTML file
-├── css/
-│   └── style.css      # All styling
-├── js/
-│   └── script.js      # Interactive functionality
-├── images/            # Place your images here
-└── README.md          # This file
-```
-
-## Usage
-
-### Running Locally
-
-Simply open `index.html` in any modern web browser:
-
-```bash
-open index.html
-```
-
-Or use a local server:
+1. Clone this repository
+2. Copy `js/config.example.js` to `js/config.js` and fill in your webhook credentials
+3. Open `index.html` in your web browser or use a local server
 
 ```bash
 # Using Python
@@ -61,9 +36,25 @@ python -m http.server 8000
 npx serve
 ```
 
-Then navigate to `http://localhost:8000`
+## Project Structure
 
-### Customization
+```
+ai-tools-hub/
+├── index.html              # Main page
+├── css/
+│   └── style.css           # All styling
+├── js/
+│   ├── script.js           # Interactive functionality
+│   ├── config.js           # Credentials (gitignored)
+│   └── config.example.js   # Config template
+├── tools/                  # 52 individual tool pages
+│   ├── chatgpt.html
+│   ├── midjourney.html
+│   └── ...
+└── README.md
+```
+
+## Customization
 
 **Adding New Tools:**
 
@@ -71,81 +62,17 @@ Edit the `aiTools` array in `js/script.js`:
 
 ```javascript
 {
-    id: 21,
+    id: 84,
     name: "Your Tool Name",
-    category: "writing", // or image, video, code, etc.
+    category: "writing",
     description: "Tool description here",
-    pricing: "freemium", // or free, paid
-    icon: "fa-pen", // Font Awesome icon
+    pricing: "freemium",
+    icon: "fa-pen",
     url: "https://yourtool.com",
-    featured: false // Set to true for featured section
+    featured: false
 }
 ```
-
-**Changing Colors:**
-
-Modify CSS variables in `css/style.css`:
-
-```css
-:root {
-    --primary-color: #6366f1;
-    --secondary-color: #8b5cf6;
-    --accent-color: #ec4899;
-    /* ... */
-}
-```
-
-## Features Breakdown
-
-### Search Functionality
-- Real-time search as you type
-- Searches across tool names, descriptions, and categories
-- Case-insensitive matching
-
-### Filtering System
-- Filter by 12+ categories
-- Filter by pricing model (Free, Freemium, Paid)
-- Sort by popularity, newest, or alphabetically
-- Live results counter
-
-### Responsive Design
-- Mobile-first approach
-- Breakpoints at 968px and 640px
-- Collapsible mobile navigation
-- Touch-friendly interface
-
-### User Experience
-- Smooth scroll navigation
-- Lazy loading with "Load More" button
-- Hover animations on cards
-- Form validation
-- Success notifications
-
-## Browser Support
-
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-
-## Future Enhancements
-
-Potential features to add:
-
-- Backend integration with database
-- User authentication and favorites
-- Tool reviews and ratings
-- Admin dashboard for tool approval
-- API for tool data
-- Blog section with articles
-- Dark mode toggle
-- Advanced filters (tags, platforms, etc.)
 
 ## License
 
-This is a demo project for educational purposes.
-
-## Credits
-
-- Icons: Font Awesome
-- Design inspiration: Modern AI tool directory websites
+This is a proprietary project by Disruptors Media.
