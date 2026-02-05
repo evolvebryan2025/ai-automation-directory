@@ -12,9 +12,9 @@
     --accent-color: #EAB308;
     --text-dark: #0E0E0E;
     --text-light: #6b7280;
-    --bg-light: #0E0E0E;
-    --bg-white: #1a1a1a;
-    --border-color: #2a2a2a;
+    --bg-light: #141414;
+    --bg-white: #1f1f1f;
+    --border-color: #333333;
     --success-color: #22c55e;
     --warning-color: #EAB308;
     --gradient: linear-gradient(135deg, #1F2937 0%, #111827 100%);
@@ -32,7 +32,7 @@ body {
     font-family: 'Neue Montreal', Arial, sans-serif;
     line-height: 1.7;
     color: #e5e5e5;
-    background-color: #0E0E0E;
+    background-color: #141414;
     font-size: 20px;
     font-weight: 400;
 }
@@ -60,7 +60,7 @@ code, pre, .monospace {
 }
 
 .header.scrolled {
-    background: rgba(14, 14, 14, 0.75);
+    background: rgba(20, 20, 20, 0.80);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     box-shadow: var(--shadow-md);
@@ -145,6 +145,7 @@ code, pre, .monospace {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center 30%;
 }
 
 /* Hero Section */
@@ -191,7 +192,7 @@ code, pre, .monospace {
 .cta-section,
 .tool-detail-content {
     position: relative;
-    background: rgba(14, 14, 14, 0.85);
+    background: rgba(20, 20, 20, 0.92);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
 }
@@ -304,7 +305,7 @@ code, pre, .monospace {
     padding: 0.5rem 1rem;
     border: 1px solid var(--border-color);
     border-radius: var(--radius-md);
-    background: #1a1a1a;
+    background: #1f1f1f;
     color: #e5e5e5;
     cursor: pointer;
     outline: none;
@@ -387,7 +388,7 @@ code, pre, .monospace {
 .tool-category {
     display: inline-block;
     padding: 0.25rem 0.75rem;
-    background: #0E0E0E;
+    background: #141414;
     color: var(--accent-color);
     border-radius: var(--radius-sm);
     font-size: 0.75rem;
@@ -564,7 +565,7 @@ code, pre, .monospace {
     border-radius: var(--radius-md);
     font-size: 1rem;
     transition: border-color 0.3s;
-    background: #0E0E0E;
+    background: #141414;
     color: #e5e5e5;
 }
 
@@ -674,7 +675,7 @@ code, pre, .monospace {
 }
 
 .notification-card {
-    background: #1a1a1a;
+    background: #1f1f1f;
     border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
     padding: 3rem;
